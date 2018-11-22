@@ -11,8 +11,12 @@ public class BowlingGame {
 
     private int getTotal(String[] frames) {
         int total = 0;
-        for (String frame: frames) {
+        for (int i = 0; i < frames.length; ++i) {
+            var frame = frames[i];
             total += totalFor(frame);
+            if (frame.equals(String.valueOf(STRIKE))) {
+                total += totalFor(frames[i+1]);
+            }
         }
         return total;
     }
