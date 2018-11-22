@@ -5,7 +5,7 @@ public class BowlingGame {
     public static final char STRIKE = 'X';
 
     public int calculate(String scorecard) {
-        var frames = scorecard.split(Pattern.quote("|"));
+        var frames = scorecard.replaceAll(Pattern.quote("||"), "|").split(Pattern.quote("|"));
         return getTotal(frames);
     }
 
