@@ -1,7 +1,10 @@
 public class BowlingGame {
     public int calculate(String scorecard) {
-        if (scorecard.contains("1"))
-            return 20;
-        return 60;
+        int total = 0;
+        for (char c: scorecard.toCharArray()) {
+            if (Character.isDigit(c))
+                total += Integer.parseInt(String.valueOf(c));
+        }
+        return total;
     }
 }

@@ -10,7 +10,8 @@ public class BowlingGameShould {
     @ParameterizedTest
     @CsvSource({
             "33|33|33|33|33|33|33|33|33|33||, 60",
-            "11|11|11|11|11|11|11|11|11|11||, 20"
+            "11|11|11|11|11|11|11|11|11|11||, 20",
+            "11|22|11|22|11|22|11|22|11|22||, 30"
     })
     public void add_numbers_correctly(String scorecard, int expectedTotal) {
         BowlingGame game = new BowlingGame();
