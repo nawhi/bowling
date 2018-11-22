@@ -1,20 +1,20 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BowlingGameShould {
 
-    @Test
-    public void add_all_threes_to_60() {
+    @ParameterizedTest
+    @CsvSource({
+            "33|33|33|33|33|33|33|33|33|33||, 60",
+            "11|11|11|11|11|11|11|11|11|11||, 20"
+    })
+    public void add_numbers_correctly(String scorecard, int expectedTotal) {
         BowlingGame game = new BowlingGame();
-        assertThat(game.calculate("33|33|33|33|33|33|33|33|33|33||"), is(60));
-    }
-
-    @Test
-    public void add_all_ones_to_20() {
-        BowlingGame game = new BowlingGame();
-        assertThat(game.calculate("11|11|11|11|11|11|11|11|11|11||"), is(20));
+        assertThat(game.calculate(scorecard), is(expectedTotal));
     }
 
 }
