@@ -5,8 +5,14 @@ public class BowlingGame {
     public static final char STRIKE = 'X';
 
     public int calculate(String scorecard) {
-        var frames = scorecard.replaceAll(Pattern.quote("||"), "|").split(Pattern.quote("|"));
+        var frames = splitToFrames(scorecard);
         return getTotal(frames);
+    }
+
+    private String[] splitToFrames(String scorecard) {
+        return scorecard
+                .replaceAll(Pattern.quote("||"), "|")
+                .split(Pattern.quote("|"));
     }
 
     private int getTotal(String[] frames) {
