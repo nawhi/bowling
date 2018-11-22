@@ -5,12 +5,18 @@ public class BowlingGame {
         int total = 0;
         var frames = scorecard.split(Pattern.quote("|"));
         for (String frame: frames) {
-            for (char c: frame.toCharArray()) {
-                if (c == 'X') {
-                    total += 10;
-                } else if (Character.isDigit(c)) {
-                    total += Integer.parseInt(String.valueOf(c));
-                }
+            total += totalFor(frame);
+        }
+        return total;
+    }
+
+    private int totalFor(String frame) {
+        int total = 0;
+        for (char c: frame.toCharArray()) {
+            if (c == 'X') {
+                total += 10;
+            } else if (Character.isDigit(c)) {
+                total += Integer.parseInt(String.valueOf(c));
             }
         }
         return total;
