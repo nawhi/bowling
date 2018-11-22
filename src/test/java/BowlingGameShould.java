@@ -18,7 +18,8 @@ public class BowlingGameShould {
             "X|--|--|5-|5-|5-|5-|--|--|--||, 30",
             "X|5-|--|--|--|--|--|--|--|--||, 20",
             "X|51|--|--|--|--|--|--|--|--||, 22",
-            "--|--|--|--|--|--|--|--|--|X||5-, 20",
+            "--|--|--|--|--|--|--|--|--|X||5-, 15",
+            // need special case for 'bonus ball' frame
 
     })
     public void add_numbers_correctly(String scorecard, int expectedTotal) {

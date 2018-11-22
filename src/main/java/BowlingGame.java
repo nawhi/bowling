@@ -6,6 +6,7 @@ public class BowlingGame {
 
     public int calculate(String scorecard) {
         var frames = splitToFrames(scorecard);
+        // bonus frame???
         return getTotal(frames);
     }
 
