@@ -10,7 +10,11 @@ public class BowlingGameShould {
     @CsvSource({
             "33|33|33|33|33|33|33|33|33|33||, 60",
             "11|11|11|11|11|11|11|11|11|11||, 20",
-            "11|22|11|22|11|22|11|22|11|22||, 30"
+            "11|22|11|22|11|22|11|22|11|22||, 30",
+            "12|22|11|22|11|22|11|22|11|22||, 31",
+            "--|--|--|--|--|--|--|--|--|--||, 0"
+
+
     })
     public void add_numbers_correctly(String scorecard, int expectedTotal) {
         BowlingGame game = new BowlingGame();
@@ -18,4 +22,3 @@ public class BowlingGameShould {
     }
 
 }
-omm
