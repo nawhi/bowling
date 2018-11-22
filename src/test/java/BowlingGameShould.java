@@ -17,6 +17,7 @@ public class BowlingGameShould {
             "X|--|--|--|--|--|--|--|--|--||, 10",
             "X|--|--|5-|5-|5-|5-|--|--|--||, 30",
             "X|5-|--|--|--|--|--|--|--|--||, 20",
+            "X|51|--|--|--|--|--|--|--|--||, 22",
     })
     public void add_numbers_correctly(String scorecard, int expectedTotal) {
         BowlingGame game = new BowlingGame();
