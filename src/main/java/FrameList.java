@@ -9,9 +9,11 @@ public class FrameList {
     private static final char MISS = '-';
 
     private final List<String> frames;
+    private String scorecard;
 
 
     public FrameList(String scorecard) {
+        this.scorecard = scorecard;
         this.frames = splitToFrames(scorecard);
     }
 
@@ -27,8 +29,10 @@ public class FrameList {
 
     private int bonusFrameTotal() {
         boolean haveBonusFrame = (frames.size() == 11);
-        if (haveBonusFrame)
-            return totalFor(frames.get(frames.size() - 1));
+        if (haveBonusFrame) {
+            var bonusBalls = scorecard.substring(scorecard.indexOf("||")).replace("|", "");
+            return totalFor(bonusBalls);
+        }
         return 0;
     }
 
