@@ -45,6 +45,7 @@ public class FrameList {
     }
 
     private int totalFor(String frame) {
+        // TODO: stream not for-loop
         int total = 0;
         for (char c: frame.toCharArray()) {
             total += ballScore(c);
