@@ -46,12 +46,18 @@ public class FrameList {
     private int totalFor(String frame) {
         int total = 0;
         for (char c: frame.toCharArray()) {
-            if (c == STRIKE) {
-                total += 10;
-            } else if (Character.isDigit(c)) {
-                total += Integer.parseInt(String.valueOf(c));
-            }
+            total += ballScore(c);
         }
         return total;
+    }
+
+    private int ballScore(char c) {
+        if (c == STRIKE) {
+            return 10;
+        } else if (Character.isDigit(c)) {
+            return Character.getNumericValue(c);
+        } else {
+            return 0;
+        }
     }
 }
