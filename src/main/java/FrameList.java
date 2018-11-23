@@ -1,7 +1,12 @@
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class FrameList {
+    public static final char STRIKE = 'X';
+
     private final String[] frames;
+
+
 
     public FrameList(String scorecard) {
         this.frames = splitToFrames(scorecard);
@@ -13,7 +18,47 @@ public class FrameList {
                 .split(Pattern.quote("|"));
     }
 
+    public static boolean bonusFrame(String[] frames) {
+        return (frames.length == 11);
+    }
+
     public String[] asArray() {
         return frames;
+    }
+
+    public int score() {
+        if (bonusFrame(frames)) {
+            String[] regularFrames = Arrays.copyOfRange(frames, 0, 10);
+            return getTotal(regularFrames) + getBonusTotal(frames);
+        }
+        return getTotal(frames);
+    }
+
+    private int getBonusTotal(String[] frames) {
+        return totalFor(frames[frames.length - 1]);
+    }
+
+    private int getTotal(String[] frames) {
+        int total = 0;
+        for (int i = 0; i < frames.length; ++i) {
+            var frame = frames[i];
+            total += totalFor(frame);
+            if (frame.equals(String.valueOf(STRIKE)) && i < frames.length - 1) {
+                total += totalFor(frames[i+1]);
+            }
+        }
+        return total;
+    }
+
+    private int totalFor(String frame) {
+        int total = 0;
+        for (char c: frame.toCharArray()) {
+            if (c == STRIKE) {
+                total += 10;
+            } else if (Character.isDigit(c)) {
+                total += Integer.parseInt(String.valueOf(c));
+            }
+        }
+        return total;
     }
 }
