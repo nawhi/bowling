@@ -6,7 +6,7 @@ public class BowlingGame {
     public static final char STRIKE = 'X';
 
     public int calculate(String scorecard) {
-        var allFrames = splitToFrames(scorecard);
+        var allFrames = new FrameList(scorecard).asArray();
         int total = 0;
         if (hasBonusFrame(allFrames)) {
             String[] regularFrames = Arrays.copyOfRange(allFrames, 0, 10);
@@ -23,12 +23,6 @@ public class BowlingGame {
 
     private int getBonusTotal(String[] frames) {
         return totalFor(frames[frames.length - 1]);
-    }
-
-    private String[] splitToFrames(String scorecard) {
-        return scorecard
-                .replaceAll(Pattern.quote("||"), "|")
-                .split(Pattern.quote("|"));
     }
 
     private int getTotal(String[] frames) {
