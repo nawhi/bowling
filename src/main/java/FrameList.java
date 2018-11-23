@@ -33,15 +33,30 @@ public class FrameList {
     }
 
     private int regularFrameTotal() {
+
+        String regularBalls = scorecard.substring(0, scorecard.indexOf("||")).replace("|", "");
         int total = 0;
-        for (int i = 0; i < 10; ++i) {
-            var frame = frames.get(i);
-            total += totalFor(frame);
-            if (frame.equals(String.valueOf(STRIKE)) && i < 9) {
-                total += totalFor(frames.get(i+1));
+        for (int i = 0; i < regularBalls.length(); ++i) {
+            char ball = regularBalls.charAt(i);
+            total += ballScore(ball);
+            if (regularBalls.charAt(i) == STRIKE) {
+                if (i + 1 < regularBalls.length())
+                    total += ballScore(regularBalls.charAt(i + 1));
+                if (i + 2 < regularBalls.length())
+                    total += ballScore(regularBalls.charAt(i + 2));
             }
         }
         return total;
+//
+//        int total = 0;
+//        for (int i = 0; i < 10; ++i) {
+//            var frame = frames.get(i);
+//            total += totalFor(frame);
+//            if (frame.equals(String.valueOf(STRIKE)) && i < 9) {
+//                total += totalFor(frames.get(i+1));
+//            }
+//        }
+//        return total;
     }
 
     private int totalFor(String frame) {
