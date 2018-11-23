@@ -25,12 +25,12 @@ public class FrameList {
     public int score() {
         if (haveBonusFrame()) {
             String[] regularFrames = Arrays.copyOfRange(frames, 0, 10);
-            return getTotal(regularFrames) + getBonusTotal(frames);
+            return getTotal(regularFrames) + getBonusTotal();
         }
         return getTotal(frames);
     }
 
-    private int getBonusTotal(String[] frames) {
+    private int getBonusTotal() {
         return totalFor(frames[frames.length - 1]);
     }
 
