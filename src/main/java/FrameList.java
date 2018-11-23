@@ -23,15 +23,13 @@ public class FrameList {
     }
 
     public int score() {
-        if (haveBonusFrame()) {
-            String[] regularFrames = Arrays.copyOfRange(frames, 0, 10);
-            return getTotal() + getBonusTotal();
-        }
-        return getTotal();
+        return getTotal() + getBonusTotal();
     }
 
     private int getBonusTotal() {
-        return totalFor(frames[frames.length - 1]);
+        if (haveBonusFrame())
+            return totalFor(frames[frames.length - 1]);
+        return 0;
     }
 
     private int getTotal() {
