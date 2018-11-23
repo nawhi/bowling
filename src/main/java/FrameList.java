@@ -28,12 +28,8 @@ public class FrameList {
     }
 
     private int bonusFrameTotal() {
-        boolean haveBonusFrame = (frames.size() == 11);
-        if (haveBonusFrame) {
-            var bonusBalls = scorecard.substring(scorecard.indexOf("||")).replace("|", "");
-            return totalFor(bonusBalls);
-        }
-        return 0;
+        String bonusBalls = scorecard.substring(scorecard.indexOf("||")).replace("|", "");
+        return totalFor(bonusBalls);
     }
 
     private int regularFrameTotal() {
