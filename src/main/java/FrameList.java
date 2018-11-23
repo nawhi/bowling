@@ -6,6 +6,7 @@ import static java.util.Arrays.asList;
 
 public class FrameList {
     public static final char STRIKE = 'X';
+    private static final char MISS = '-';
 
     private final List<String> frames;
 
@@ -54,10 +55,10 @@ public class FrameList {
     private int ballScore(char c) {
         if (c == STRIKE) {
             return 10;
-        } else if (Character.isDigit(c)) {
-            return Character.getNumericValue(c);
-        } else {
+        } else if (c == MISS) {
             return 0;
+        } else {
+            return Character.getNumericValue(c);
         }
     }
 }
