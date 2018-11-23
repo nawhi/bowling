@@ -18,16 +18,13 @@ public class FrameList {
                 .split(Pattern.quote("|"));
     }
 
-    public boolean haveBonusFrame() {
-        return (frames.length == 11);
-    }
-
     public int score() {
         return getTotal() + getBonusTotal();
     }
 
     private int getBonusTotal() {
-        if (haveBonusFrame())
+        boolean haveBonusFrame = (frames.length == 11);
+        if (haveBonusFrame)
             return totalFor(frames[frames.length - 1]);
         return 0;
     }
