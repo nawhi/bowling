@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class BowlingGame {
@@ -6,8 +7,13 @@ public class BowlingGame {
 
     public int calculate(String scorecard) {
         var frames = splitToFrames(scorecard);
-        // bonus frame???
+        if (frames.length == 11)
+            return getTotal(Arrays.copyOfRange(frames, 0, 10)) + getBonusTotal(frames);
         return getTotal(frames);
+    }
+
+    private int getBonusTotal(String[] frames) {
+        return totalFor(frames[frames.length - 1]);
     }
 
     private String[] splitToFrames(String scorecard) {
@@ -21,7 +27,7 @@ public class BowlingGame {
         for (int i = 0; i < frames.length; ++i) {
             var frame = frames[i];
             total += totalFor(frame);
-            if (frame.equals(String.valueOf(STRIKE))) {
+            if (frame.equals(String.valueOf(STRIKE)) && i < frames.length - 1) {
                 total += totalFor(frames[i+1]);
             }
         }
