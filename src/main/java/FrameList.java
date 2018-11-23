@@ -18,16 +18,12 @@ public class FrameList {
                 .split(Pattern.quote("|"));
     }
 
-    public static boolean bonusFrame(String[] frames) {
+    public boolean haveBonusFrame() {
         return (frames.length == 11);
     }
 
-    public String[] asArray() {
-        return frames;
-    }
-
     public int score() {
-        if (bonusFrame(frames)) {
+        if (haveBonusFrame()) {
             String[] regularFrames = Arrays.copyOfRange(frames, 0, 10);
             return getTotal(regularFrames) + getBonusTotal(frames);
         }
