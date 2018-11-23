@@ -32,7 +32,6 @@ public class FrameList {
     }
 
     private int regularFrameTotal() {
-
         String regularBalls = scorecard.substring(0, scorecard.indexOf("||")).replace("|", "");
         int total = 0;
         for (int i = 0; i < regularBalls.length(); ++i) {
