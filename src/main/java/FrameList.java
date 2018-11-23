@@ -1,20 +1,23 @@
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+
+import static java.util.Arrays.asList;
 
 public class FrameList {
     public static final char STRIKE = 'X';
 
-    private final String[] frames;
-
+    private final List<String> frames;
 
 
     public FrameList(String scorecard) {
         this.frames = splitToFrames(scorecard);
     }
 
-    private static String[] splitToFrames(String scorecard) {
-        return scorecard
+    private static List<String> splitToFrames(String scorecard) {
+        return asList(scorecard
                 .replaceAll(Pattern.quote("||"), "|")
-                .split(Pattern.quote("|"));
+                .split(Pattern.quote("|")));
     }
 
     public int score() {
@@ -22,19 +25,19 @@ public class FrameList {
     }
 
     private int bonusFrameTotal() {
-        boolean haveBonusFrame = (frames.length == 11);
+        boolean haveBonusFrame = (frames.size() == 11);
         if (haveBonusFrame)
-            return totalFor(frames[frames.length - 1]);
+            return totalFor(frames.get(frames.size() - 1));
         return 0;
     }
 
     private int regularFrameTotal() {
         int total = 0;
         for (int i = 0; i < 10; ++i) {
-            var frame = frames[i];
+            var frame = frames.get(i);
             total += totalFor(frame);
             if (frame.equals(String.valueOf(STRIKE)) && i < 9) {
-                total += totalFor(frames[i+1]);
+                total += totalFor(frames.get(i+1));
             }
         }
         return total;
