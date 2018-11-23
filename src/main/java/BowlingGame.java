@@ -7,9 +7,13 @@ public class BowlingGame {
 
     public int calculate(String scorecard) {
         var frames = splitToFrames(scorecard);
-        if (frames.length == 11)
+        if (hasBonusFrame(frames))
             return getTotal(Arrays.copyOfRange(frames, 0, 10)) + getBonusTotal(frames);
         return getTotal(frames);
+    }
+
+    private boolean hasBonusFrame(String[] frames) {
+        return (frames.length == 11);
     }
 
     private int getBonusTotal(String[] frames) {
