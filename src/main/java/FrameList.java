@@ -25,21 +25,21 @@ public class FrameList {
     public int score() {
         if (haveBonusFrame()) {
             String[] regularFrames = Arrays.copyOfRange(frames, 0, 10);
-            return getTotal(regularFrames) + getBonusTotal();
+            return getTotal() + getBonusTotal();
         }
-        return getTotal(frames);
+        return getTotal();
     }
 
     private int getBonusTotal() {
         return totalFor(frames[frames.length - 1]);
     }
 
-    private int getTotal(String[] frames) {
+    private int getTotal() {
         int total = 0;
-        for (int i = 0; i < frames.length; ++i) {
+        for (int i = 0; i < 10; ++i) {
             var frame = frames[i];
             total += totalFor(frame);
-            if (frame.equals(String.valueOf(STRIKE)) && i < frames.length - 1) {
+            if (frame.equals(String.valueOf(STRIKE)) && i < 9) {
                 total += totalFor(frames[i+1]);
             }
         }
