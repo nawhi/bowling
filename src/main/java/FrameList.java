@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
@@ -29,7 +28,7 @@ public class FrameList {
 
     private int bonusFrameTotal() {
         String bonusBalls = scorecard.substring(scorecard.indexOf("||")).replace("|", "");
-        return totalFor(bonusBalls);
+        return bonusBallTotal(bonusBalls);
     }
 
     private int regularFrameTotal() {
@@ -40,26 +39,17 @@ public class FrameList {
             char ball = regularBalls.charAt(i);
             total += ballScore(ball);
             if (regularBalls.charAt(i) == STRIKE) {
-                if (i + 1 < regularBalls.length())
-                    total += ballScore(regularBalls.charAt(i + 1));
-                if (i + 2 < regularBalls.length())
-                    total += ballScore(regularBalls.charAt(i + 2));
+                for (var j = 1; j < 3; ++j) {
+                    if (i + j < regularBalls.length()) {
+                        total += ballScore(regularBalls.charAt(i + j));
+                    }
+                }
             }
         }
         return total;
-//
-//        int total = 0;
-//        for (int i = 0; i < 10; ++i) {
-//            var frame = frames.get(i);
-//            total += totalFor(frame);
-//            if (frame.equals(String.valueOf(STRIKE)) && i < 9) {
-//                total += totalFor(frames.get(i+1));
-//            }
-//        }
-//        return total;
     }
 
-    private int totalFor(String frame) {
+    private int bonusBallTotal(String frame) {
         // TODO: stream not for-loop
         int total = 0;
         for (char c: frame.toCharArray()) {
