@@ -6,10 +6,15 @@ public class BowlingGame {
     public static final char STRIKE = 'X';
 
     public int calculate(String scorecard) {
-        var frames = splitToFrames(scorecard);
-        if (hasBonusFrame(frames))
-            return getTotal(Arrays.copyOfRange(frames, 0, 10)) + getBonusTotal(frames);
-        return getTotal(frames);
+        var allFrames = splitToFrames(scorecard);
+        int total = 0;
+        if (hasBonusFrame(allFrames)) {
+            String[] regularFrames = Arrays.copyOfRange(allFrames, 0, 10);
+            total = getTotal(regularFrames) + getBonusTotal(allFrames);
+        } else {
+            total = getTotal(allFrames);
+        }
+        return total;
     }
 
     private boolean hasBonusFrame(String[] frames) {
