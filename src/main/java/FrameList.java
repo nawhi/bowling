@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class FrameList {
@@ -19,17 +18,17 @@ public class FrameList {
     }
 
     public int score() {
-        return getTotal() + getBonusTotal();
+        return regularFrameTotal() + bonusFrameTotal();
     }
 
-    private int getBonusTotal() {
+    private int bonusFrameTotal() {
         boolean haveBonusFrame = (frames.length == 11);
         if (haveBonusFrame)
             return totalFor(frames[frames.length - 1]);
         return 0;
     }
 
-    private int getTotal() {
+    private int regularFrameTotal() {
         int total = 0;
         for (int i = 0; i < 10; ++i) {
             var frame = frames[i];
