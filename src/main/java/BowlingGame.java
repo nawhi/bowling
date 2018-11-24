@@ -26,48 +26,48 @@ public class BowlingGame {
                 .length();
     }
 
-    private int scoreBallAt(int ballIndex) {
-        char ball = balls.charAt(ballIndex);
+    private int scoreBallAt(int index) {
+        char ball = balls.charAt(index);
         if (ball == STRIKE) {
-            return scoreStrikeAt(ballIndex);
+            return scoreStrikeAt(index);
         } else if (ball == SPARE) {
-            return scoreSpareAt(ballIndex);
+            return scoreSpareAt(index);
         } else {
-            return scoreRegularBallAt(ballIndex);
+            return scoreRegularBallAt(index);
         }
     }
 
-    private int scoreSpareAt(int ballIndex) {
-        int thisBallScore = scoreRegularBallAt(ballIndex);
-        boolean haveNextBall = ballIndex + 1 < balls.length();
+    private int scoreSpareAt(int ix) {
+        int thisBallScore = scoreRegularBallAt(ix);
+        boolean haveNextBall = (ix + 1 < balls.length());
         if (haveNextBall) {
-            int nextBallScore = scoreRegularBallAt(ballIndex + 1);
+            int nextBallScore = scoreRegularBallAt(ix + 1);
             return thisBallScore + nextBallScore;
         } else {
             return thisBallScore;
         }
     }
 
-    private int scoreStrikeAt(int ballIndex) {
+    private int scoreStrikeAt(int ix) {
         int thisScore = 10;
-        boolean haveTwoMoreBalls = ballIndex + 2 < balls.length();
+        boolean haveTwoMoreBalls = (ix + 2 < balls.length());
         if (haveTwoMoreBalls) {
-            int nextTwoScores = scoreRegularBallAt(ballIndex + 1)
-                    + scoreRegularBallAt(ballIndex + 2);
+            int nextTwoScores = scoreRegularBallAt(ix + 1)
+                    + scoreRegularBallAt(ix + 2);
             return thisScore + nextTwoScores;
         } else {
             return thisScore;
         }
     }
 
-    private int scoreRegularBallAt(int ballIndex) {
-        char c = balls.charAt(ballIndex);
+    private int scoreRegularBallAt(int ix) {
+        char c = balls.charAt(ix);
         switch(c)
         {
             case STRIKE:
                 return 10;
             case SPARE:
-                return 10 - scoreRegularBallAt(ballIndex - 1);
+                return 10 - scoreRegularBallAt(ix - 1);
             case MISS:
                 return 0;
             default:
