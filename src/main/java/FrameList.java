@@ -27,8 +27,12 @@ public class FrameList {
     }
 
     private int bonusFrameTotal() {
-        String bonusBalls = scorecard.substring(scorecard.indexOf("||")).replace("|", "");
+        String bonusBalls = getBonusBalls();
         return bonusBallTotal(bonusBalls);
+    }
+
+    private String getBonusBalls() {
+        return scorecard.substring(scorecard.indexOf("||")).replace("|", "");
     }
 
     private int regularFrameTotal() {
@@ -49,12 +53,9 @@ public class FrameList {
     }
 
     private int bonusBallTotal(String frame) {
-        // TODO: stream not for-loop
-        int total = 0;
-        for (char c: frame.toCharArray()) {
-            total += ballScore(c);
-        }
-        return total;
+        return frame.chars()
+                .map(c -> ballScore((char) c))
+                .sum();
     }
 
     private int ballScore(char c) {
