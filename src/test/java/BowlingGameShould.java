@@ -36,7 +36,8 @@ public class BowlingGameShould {
             "X|7/|9-|X|-8|8/|-6|X|X|X||81, 167"
     })
     public void add_numbers_correctly(String scorecard, int expectedTotal) {
-        assertThat(new BowlingGame(scorecard).score(), is(expectedTotal));
+        BowlingGame game = new BowlingGame(scorecard);
+        assertThat(game.score(), is(expectedTotal));
     }
 
 }
