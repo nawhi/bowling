@@ -38,14 +38,13 @@ public class BowlingGame {
     }
 
     private int scoreSpareAt(int ix) {
-        int thisBallScore = scoreRegularBallAt(ix);
+        int score = scoreRegularBallAt(ix);
         boolean haveNextBall = (ix + 1 < balls.length());
         if (haveNextBall) {
             int nextBallScore = scoreRegularBallAt(ix + 1);
-            return thisBallScore + nextBallScore;
-        } else {
-            return thisBallScore;
+            score += nextBallScore;
         }
+        return score;
     }
 
     private int scoreStrikeAt(int ix) {
