@@ -28,7 +28,8 @@ public class FrameList {
                     + ballScore(balls.charAt(ballIndex + 1))
                     + ballScore(balls.charAt(ballIndex + 2));
         } else if (ball == SPARE) {
-            return 10 - ballScore(balls.charAt(ballIndex - 1));
+            return 10 - ballScore(balls.charAt(ballIndex - 1))
+                    + ballScore(balls.charAt(ballIndex + 1));
         } else {
             return ballScore(ball);
         }

@@ -23,7 +23,10 @@ public class BowlingGameShould {
             "--|--|--|--|--|--|--|--|--|X||XX, 30",
             "X|X|X|--|--|--|--|--|--|--||, 60",
             "X|X|X|X|X|X|X|X|X|X||XX, 300",
-            "9/|--|--|--|--|--|--|--|--||, 10",
+            "9/|--|--|--|--|--|--|--|--|--||, 10",
+            "9/|34|--|--|--|--|--|--|--|--||, 20",
+            "5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5, 150",
+//            "X|X|X|X|X|X|X|X|X|X||5/, 285",
     })
     public void add_numbers_correctly(String scorecard, int expectedTotal) {
         BowlingGame game = new BowlingGame();
