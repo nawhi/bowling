@@ -15,13 +15,16 @@ public class FrameList {
         for (int i = 0; i < getNumRegularBalls(); ++i) {
             char ball = balls.charAt(i);
             total += ballScore(ball);
-            if (balls.charAt(i) == STRIKE) {
-                for (var j = 1; j < 3; ++j) {
-                    total += ballScore(balls.charAt(i + j));
-                }
+            if (ball == STRIKE) {
+                total += scoreStrikeAt(i);
             }
         }
         return total;
+    }
+
+    private int scoreStrikeAt(int ballIndex) {
+        return ballScore(balls.charAt(ballIndex + 1))
+                + ballScore(balls.charAt(ballIndex + 2));
     }
 
     private int getNumRegularBalls() {
