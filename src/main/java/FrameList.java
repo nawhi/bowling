@@ -3,6 +3,7 @@ import java.util.stream.IntStream;
 public class FrameList {
     public static final char STRIKE = 'X';
     private static final char MISS = '-';
+    private static final char SPARE = '/';
 
     private final String scorecard;
     private final String balls;
@@ -26,6 +27,8 @@ public class FrameList {
             return ballScore(balls.charAt(ballIndex))
                     + ballScore(balls.charAt(ballIndex + 1))
                     + ballScore(balls.charAt(ballIndex + 2));
+        } else if (ball == SPARE) {
+            return 10 - ballScore(balls.charAt(ballIndex - 1));
         } else {
             return ballScore(ball);
         }
