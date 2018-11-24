@@ -16,15 +16,16 @@ public class FrameList {
         this.frames = splitToFrames(scorecard);
     }
 
+    public int score() {
+        return regularFrameTotal() + bonusBallTotal();
+    }
+    
     private static List<String> splitToFrames(String scorecard) {
         return asList(scorecard
                 .replaceAll(Pattern.quote("||"), "|")
                 .split(Pattern.quote("|")));
     }
 
-    public int score() {
-        return regularFrameTotal() + bonusBallTotal();
-    }
 
     private String getBonusBalls() {
         return scorecard.substring(scorecard.indexOf("||")).replace("|", "");
