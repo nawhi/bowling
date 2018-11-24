@@ -29,9 +29,8 @@ public class FrameList {
 
     private int regularFrameTotal() {
         String allBalls = scorecard.replace("|", "");
-        int numRegularBalls = scorecard.substring(0, scorecard.indexOf("||")).replace("|", "").length();
         int total = 0;
-        for (int i = 0; i < numRegularBalls; ++i) {
+        for (int i = 0; i < getNumRegularBalls(); ++i) {
             char ball = allBalls.charAt(i);
             total += ballScore(ball);
             if (allBalls.charAt(i) == STRIKE) {
@@ -41,6 +40,13 @@ public class FrameList {
             }
         }
         return total;
+    }
+
+    private int getNumRegularBalls() {
+        return scorecard
+                .substring(0, scorecard.indexOf("||"))
+                .replace("|", "")
+                .length();
     }
 
     private int ballScore(char c) {
