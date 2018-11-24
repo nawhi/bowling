@@ -55,8 +55,9 @@ public class BowlingGame {
             int nextTwoScores = scoreRegularBallAt(ballIndex + 1)
                     + scoreRegularBallAt(ballIndex + 2);
             return thisScore + nextTwoScores;
+        } else {
+            return thisScore;
         }
-        return thisScore;
     }
 
     private int scoreRegularBallAt(int ballIndex) {
