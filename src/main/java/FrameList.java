@@ -35,15 +35,15 @@ public class FrameList {
         } else if (ball == SPARE) {
             return scoreSpareAt(ballIndex);
         } else {
-            return scoreRegularBall(ball);
+            return scoreRegularBallAt(ballIndex);
         }
     }
 
     private int scoreSpareAt(int ballIndex) {
-        int thisBallScore = 10 - scoreRegularBall(balls.charAt(ballIndex - 1));
+        int thisBallScore = scoreRegularBallAt(ballIndex);
         boolean haveNextBall = ballIndex + 1 < balls.length();
         if (haveNextBall) {
-            int nextBallScore = scoreRegularBall(balls.charAt(ballIndex + 1));
+            int nextBallScore = scoreRegularBallAt(ballIndex + 1);
             return thisBallScore + nextBallScore;
         } else {
             return thisBallScore;
@@ -54,14 +54,18 @@ public class FrameList {
         int thisScore = 10;
         boolean haveTwoMoreBalls = ballIndex + 2 < balls.length();
         if (haveTwoMoreBalls) {
-            int nextTwoScores = scoreRegularBall(balls.charAt(ballIndex + 1))
-                    + scoreRegularBall(balls.charAt(ballIndex + 2));
+            int nextTwoScores = scoreRegularBallAt(ballIndex + 1)
+                    + scoreRegularBallAt(ballIndex + 2);
             return thisScore + nextTwoScores;
         }
         return thisScore;
     }
 
-    private int scoreRegularBall(char c) {
+    private int scoreRegularBallAt(int ballIndex) {
+        char c = balls.charAt(ballIndex);
+        if (c == SPARE) {
+            return 10 - scoreRegularBallAt(ballIndex - 1);
+        }
         if (c == STRIKE) {
             return 10;
         } else if (c == MISS) {
