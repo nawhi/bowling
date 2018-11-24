@@ -7,20 +7,10 @@ public class FrameList {
     public static final char STRIKE = 'X';
     private static final char MISS = '-';
 
-    private final List<String> frames;
     private String scorecard;
-
 
     public FrameList(String scorecard) {
         this.scorecard = scorecard;
-        this.frames = splitToFrames(scorecard);
-    }
-
-    private static List<String> splitToFrames(String scorecard) {
-        String[] frames = scorecard
-                .replaceAll(Pattern.quote("||"), "|")
-                .split(Pattern.quote("|"));
-        return asList(frames);
     }
 
     public int score() {
