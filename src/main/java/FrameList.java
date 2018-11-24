@@ -19,11 +19,12 @@ public class FrameList {
     public int score() {
         return regularFrameTotal() + bonusBallTotal();
     }
-    
+
     private static List<String> splitToFrames(String scorecard) {
-        return asList(scorecard
+        String[] frames = scorecard
                 .replaceAll(Pattern.quote("||"), "|")
-                .split(Pattern.quote("|")));
+                .split(Pattern.quote("|"));
+        return asList(frames);
     }
 
 
