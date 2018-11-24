@@ -24,15 +24,29 @@ public class FrameList {
     private int scoreBallAt(int ballIndex) {
         char ball = balls.charAt(ballIndex);
         if (ball == STRIKE) {
-            return ballScore(balls.charAt(ballIndex))
-                    + ballScore(balls.charAt(ballIndex + 1))
-                    + ballScore(balls.charAt(ballIndex + 2));
+            return scoreStrikeAt(ballIndex);
         } else if (ball == SPARE) {
-            return 10 - ballScore(balls.charAt(ballIndex - 1))
-                    + ballScore(balls.charAt(ballIndex + 1));
+            return scoreSpareAt(ballIndex);
         } else {
-            return ballScore(ball);
+            return scoreRegularBallAt(ball);
         }
+    }
+
+    private int scoreSpareAt(int ballIndex) {
+        if (ballIndex + 1 < balls.length()) {
+            return 10 - scoreRegularBallAt(balls.charAt(ballIndex - 1))
+                    + scoreRegularBallAt(balls.charAt(ballIndex + 1));
+        }
+        return 10 - scoreRegularBallAt(balls.charAt(ballIndex - 1));
+    }
+
+    private int scoreStrikeAt(int ballIndex) {
+        if (ballIndex + 2 < balls.length()) {
+            return scoreRegularBallAt(balls.charAt(ballIndex))
+                    + scoreRegularBallAt(balls.charAt(ballIndex + 1))
+                    + scoreRegularBallAt(balls.charAt(ballIndex + 2));
+        }
+        return scoreRegularBallAt(balls.charAt(ballIndex));
     }
 
     private int getNumRegularBalls() {
@@ -42,7 +56,7 @@ public class FrameList {
                 .length();
     }
 
-    private int ballScore(char c) {
+    private int scoreRegularBallAt(char c) {
         if (c == STRIKE) {
             return 10;
         } else if (c == MISS) {
