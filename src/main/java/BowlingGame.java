@@ -10,20 +10,15 @@ public class BowlingGame {
 
     public BowlingGame(String scorecard) {
         this.balls = scorecard.replace("|", "");
-        this.numRegularBalls = getNumRegularBalls(scorecard);
+
+        String regularBalls = scorecard.substring(0, scorecard.indexOf("||"));
+        this.numRegularBalls = regularBalls.replace("|", "").length();
     }
 
     public int score() {
         return IntStream.range(0, numRegularBalls)
                 .map(this::scoreBallAt)
                 .sum();
-    }
-
-    private int getNumRegularBalls(String scorecard) {
-        return scorecard
-                .substring(0, scorecard.indexOf("||"))
-                .replace("|", "")
-                .length();
     }
 
     private int scoreBallAt(int index) {
