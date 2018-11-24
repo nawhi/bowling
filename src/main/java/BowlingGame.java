@@ -39,8 +39,7 @@ public class BowlingGame {
 
     private int scoreSpareAt(int ix) {
         int score = scoreRegularBallAt(ix);
-        boolean haveNextBall = (ix + 1 < balls.length());
-        if (haveNextBall) {
+        if (ix + 1 < balls.length()) {
             int nextBallScore = scoreRegularBallAt(ix + 1);
             score += nextBallScore;
         }
@@ -48,9 +47,8 @@ public class BowlingGame {
     }
 
     private int scoreStrikeAt(int ix) {
-        int score = 10;
-        boolean haveTwoMoreBalls = (ix + 2 < balls.length());
-        if (haveTwoMoreBalls) {
+        int score = scoreRegularBallAt(ix);
+        if (ix + 2 < balls.length()) {
             int nextTwoScores = scoreRegularBallAt(ix + 1)
                     + scoreRegularBallAt(ix + 2);
             score += nextTwoScores;
