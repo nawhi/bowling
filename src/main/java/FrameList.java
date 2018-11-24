@@ -1,8 +1,3 @@
-import java.util.List;
-import java.util.regex.Pattern;
-
-import static java.util.Arrays.asList;
-
 public class FrameList {
     public static final char STRIKE = 'X';
     private static final char MISS = '-';
