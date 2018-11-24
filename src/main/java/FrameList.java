@@ -23,12 +23,7 @@ public class FrameList {
     }
 
     public int score() {
-        return regularFrameTotal() + bonusFrameTotal();
-    }
-
-    private int bonusFrameTotal() {
-        String bonusBalls = getBonusBalls();
-        return bonusBallTotal(bonusBalls);
+        return regularFrameTotal() + bonusBallTotal();
     }
 
     private String getBonusBalls() {
@@ -52,8 +47,8 @@ public class FrameList {
         return total;
     }
 
-    private int bonusBallTotal(String frame) {
-        return frame.chars()
+    private int bonusBallTotal() {
+        return getBonusBalls().chars()
                 .map(c -> ballScore((char) c))
                 .sum();
     }
