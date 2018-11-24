@@ -16,10 +16,6 @@ public class FrameList {
         this.frames = splitToFrames(scorecard);
     }
 
-    public int score() {
-        return regularFrameTotal();
-    }
-
     private static List<String> splitToFrames(String scorecard) {
         String[] frames = scorecard
                 .replaceAll(Pattern.quote("||"), "|")
@@ -27,7 +23,7 @@ public class FrameList {
         return asList(frames);
     }
 
-    private int regularFrameTotal() {
+    public int score() {
         String allBalls = scorecard.replace("|", "");
         int total = 0;
         for (int i = 0; i < getNumRegularBalls(); ++i) {
