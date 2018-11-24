@@ -6,17 +6,17 @@ public class BowlingGame {
     private static final char SPARE = '/';
 
     private final String balls;
-    private final int numRegularBalls;
+    private final String regularBalls;
 
     public BowlingGame(String scorecard) {
         this.balls = scorecard.replace("|", "");
 
-        String regularBalls = scorecard.substring(0, scorecard.indexOf("||"));
-        this.numRegularBalls = regularBalls.replace("|", "").length();
+        int bonusBallsIx = scorecard.indexOf("||");
+        this.regularBalls = scorecard.substring(0, bonusBallsIx).replace("|", "");
     }
 
     public int score() {
-        return IntStream.range(0, numRegularBalls)
+        return IntStream.range(0, regularBalls.length())
                 .map(this::scoreBallAt)
                 .sum();
     }
