@@ -41,20 +41,24 @@ public class FrameList {
 
     private int scoreSpareAt(int ballIndex) {
         int thisBallScore = 10 - scoreRegularBall(balls.charAt(ballIndex - 1));
-        if (ballIndex + 1 < balls.length()) {
-            int spareBonus = scoreRegularBall(balls.charAt(ballIndex + 1));
-            return thisBallScore + spareBonus;
+        boolean haveNextBall = ballIndex + 1 < balls.length();
+        if (haveNextBall) {
+            int nextBallScore = scoreRegularBall(balls.charAt(ballIndex + 1));
+            return thisBallScore + nextBallScore;
+        } else {
+            return thisBallScore;
         }
-        return thisBallScore;
     }
 
     private int scoreStrikeAt(int ballIndex) {
-        if (ballIndex + 2 < balls.length()) {
-            return 10
-                    + scoreRegularBall(balls.charAt(ballIndex + 1))
+        int thisScore = 10;
+        boolean haveTwoMoreBalls = ballIndex + 2 < balls.length();
+        if (haveTwoMoreBalls) {
+            int nextTwoScores = scoreRegularBall(balls.charAt(ballIndex + 1))
                     + scoreRegularBall(balls.charAt(ballIndex + 2));
+            return thisScore + nextTwoScores;
         }
-        return 10;
+        return thisScore;
     }
 
     private int scoreRegularBall(char c) {
