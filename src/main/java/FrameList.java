@@ -17,7 +17,7 @@ public class FrameList {
     }
 
     public int score() {
-        return regularFrameTotal() + bonusBallTotal();
+        return regularFrameTotal();
     }
 
     private static List<String> splitToFrames(String scorecard) {
@@ -27,32 +27,20 @@ public class FrameList {
         return asList(frames);
     }
 
-
-    private String getBonusBalls() {
-        return scorecard.substring(scorecard.indexOf("||")).replace("|", "");
-    }
-
     private int regularFrameTotal() {
-        String regularBalls = scorecard.substring(0, scorecard.indexOf("||")).replace("|", "");
+        String allBalls = scorecard.replace("|", "");
+        int numRegularBalls = scorecard.substring(0, scorecard.indexOf("||")).replace("|", "").length();
         int total = 0;
-        for (int i = 0; i < regularBalls.length(); ++i) {
-            char ball = regularBalls.charAt(i);
+        for (int i = 0; i < numRegularBalls; ++i) {
+            char ball = allBalls.charAt(i);
             total += ballScore(ball);
-            if (regularBalls.charAt(i) == STRIKE) {
+            if (allBalls.charAt(i) == STRIKE) {
                 for (var j = 1; j < 3; ++j) {
-                    if (i + j < regularBalls.length()) {
-                        total += ballScore(regularBalls.charAt(i + j));
-                    }
+                    total += ballScore(allBalls.charAt(i + j));
                 }
             }
         }
         return total;
-    }
-
-    private int bonusBallTotal() {
-        return getBonusBalls().chars()
-                .map(c -> ballScore((char) c))
-                .sum();
     }
 
     private int ballScore(char c) {
