@@ -21,18 +21,14 @@ public class FrameList {
     }
 
     private int scoreBallAt(int ballIndex) {
-        int total = 0;
         char ball = balls.charAt(ballIndex);
-        total += ballScore(ball);
         if (ball == STRIKE) {
-            total += scoreStrikeAt(ballIndex);
+            return ballScore(balls.charAt(ballIndex))
+                    + ballScore(balls.charAt(ballIndex + 1))
+                    + ballScore(balls.charAt(ballIndex + 2));
+        } else {
+            return ballScore(ball);
         }
-        return total;
-    }
-
-    private int scoreStrikeAt(int ballIndex) {
-        return ballScore(balls.charAt(ballIndex + 1))
-                + ballScore(balls.charAt(ballIndex + 2));
     }
 
     private int getNumRegularBalls() {
