@@ -48,15 +48,14 @@ public class BowlingGame {
     }
 
     private int scoreStrikeAt(int ix) {
-        int thisScore = 10;
+        int score = 10;
         boolean haveTwoMoreBalls = (ix + 2 < balls.length());
         if (haveTwoMoreBalls) {
             int nextTwoScores = scoreRegularBallAt(ix + 1)
                     + scoreRegularBallAt(ix + 2);
-            return thisScore + nextTwoScores;
-        } else {
-            return thisScore;
+            score += nextTwoScores;
         }
+        return score;
     }
 
     private int scoreRegularBallAt(int ix) {
