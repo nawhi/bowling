@@ -21,6 +21,13 @@ public class FrameList {
                 .sum();
     }
 
+    private int getNumRegularBalls() {
+        return scorecard
+                .substring(0, scorecard.indexOf("||"))
+                .replace("|", "")
+                .length();
+    }
+
     private int scoreBallAt(int ballIndex) {
         char ball = balls.charAt(ballIndex);
         if (ball == STRIKE) {
@@ -48,13 +55,6 @@ public class FrameList {
                     + scoreRegularBall(balls.charAt(ballIndex + 2));
         }
         return 10;
-    }
-
-    private int getNumRegularBalls() {
-        return scorecard
-                .substring(0, scorecard.indexOf("||"))
-                .replace("|", "")
-                .length();
     }
 
     private int scoreRegularBall(char c) {
