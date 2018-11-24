@@ -29,29 +29,20 @@ public class BowlingGame {
     private int scoreBallAt(int index) {
         char ball = balls.charAt(index);
         if (ball == STRIKE) {
-            return scoreStrikeAt(index);
+            return scoreBonusBallsFor(index, 2);
         } else if (ball == SPARE) {
-            return scoreSpareAt(index);
+            return scoreBonusBallsFor(index, 1);
         } else {
             return scoreRegularBallAt(index);
         }
     }
 
-    private int scoreSpareAt(int ix) {
+    private int scoreBonusBallsFor(int ix, int numScores) {
         int score = scoreRegularBallAt(ix);
-        if (ix + 1 < balls.length()) {
-            int nextBallScore = scoreRegularBallAt(ix + 1);
-            score += nextBallScore;
-        }
-        return score;
-    }
-
-    private int scoreStrikeAt(int ix) {
-        int score = scoreRegularBallAt(ix);
-        if (ix + 2 < balls.length()) {
-            int nextTwoScores = scoreRegularBallAt(ix + 1)
-                    + scoreRegularBallAt(ix + 2);
-            score += nextTwoScores;
+        if (ix + numScores < balls.length()) {
+            for (int j = 1; j <= numScores; j++) {
+                score += scoreRegularBallAt(ix + j);
+            }
         }
         return score;
     }
