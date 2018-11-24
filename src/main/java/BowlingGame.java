@@ -35,9 +35,9 @@ public class BowlingGame {
     private int bonusScore(int ix, int numBonuses) {
         int score = regularScore(ix);
         if (ix + numBonuses < balls.length()) {
-            for (int j = 1; j <= numBonuses; j++) {
-                score += regularScore(ix + j);
-            }
+            score += IntStream.range(1, numBonuses + 1)
+                    .map(i -> regularScore(ix + i))
+                    .sum();
         }
         return score;
     }
