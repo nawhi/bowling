@@ -33,21 +33,21 @@ public class FrameList {
     }
 
     private int scoreSpareAt(int ballIndex) {
+        int thisBallScore = 10 - scoreRegularBall(balls.charAt(ballIndex - 1));
         if (ballIndex + 1 < balls.length()) {
-            int thisBallScore = 10 - scoreRegularBall(balls.charAt(ballIndex - 1));
             int spareBonus = scoreRegularBall(balls.charAt(ballIndex + 1));
             return thisBallScore + spareBonus;
         }
-        return 10 - scoreRegularBall(balls.charAt(ballIndex - 1));
+        return thisBallScore;
     }
 
     private int scoreStrikeAt(int ballIndex) {
         if (ballIndex + 2 < balls.length()) {
-            return scoreRegularBall(balls.charAt(ballIndex))
+            return 10
                     + scoreRegularBall(balls.charAt(ballIndex + 1))
                     + scoreRegularBall(balls.charAt(ballIndex + 2));
         }
-        return scoreRegularBall(balls.charAt(ballIndex));
+        return 10;
     }
 
     private int getNumRegularBalls() {
