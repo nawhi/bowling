@@ -31,22 +31,24 @@ public class BowlingGame {
     private int scoreBallAt(int index) {
         char ball = allBalls.charAt(index);
         if (ball == STRIKE) {
-            return bonusScore(index, 2);
+            return regularScore(index) + bonusScore(index, 2);
         } else if (ball == SPARE) {
-            return bonusScore(index, 1);
+            return regularScore(index) + bonusScore(index, 1);
         } else {
             return regularScore(index);
         }
     }
 
     private int bonusScore(int ix, int numBonuses) {
-        int score = regularScore(ix);
-        if (ix + numBonuses < allBalls.length()) {
-            score += IntStream.range(1, numBonuses + 1)
+        if (!hasBonusBalls(ix, numBonuses))
+            return 0;
+        return IntStream.range(1, numBonuses + 1)
                     .map(i -> regularScore(ix + i))
                     .sum();
-        }
-        return score;
+    }
+
+    private boolean hasBonusBalls(int ix, int numBonuses) {
+        return (ix + numBonuses < allBalls.length());
     }
 
     private int regularScore(int ix) {
