@@ -5,14 +5,12 @@ public class BowlingGame {
     private static final char MISS = '-';
     private static final char SPARE = '/';
 
-    private final String balls;
+    private final String allBalls;
     private final String regularBalls;
 
     public BowlingGame(String scorecard) {
-        this.balls = scorecard.replace("|", "");
-
-        int bonusBallsIx = scorecard.indexOf("||");
-        this.regularBalls = scorecard.substring(0, bonusBallsIx).replace("|", "");
+        this.allBalls = ballsFrom(scorecard);
+        this.regularBalls = nonBonusBallsFrom(scorecard);
     }
 
     public int score() {
@@ -21,8 +19,17 @@ public class BowlingGame {
                 .sum();
     }
 
+    private String ballsFrom(String scorecard) {
+        return scorecard.replace("|", "");
+    }
+
+    private String nonBonusBallsFrom(String scorecard) {
+        int bonusIx = scorecard.indexOf("||");
+        return ballsFrom(scorecard.substring(0, bonusIx));
+    }
+
     private int scoreBallAt(int index) {
-        char ball = balls.charAt(index);
+        char ball = allBalls.charAt(index);
         if (ball == STRIKE) {
             return bonusScore(index, 2);
         } else if (ball == SPARE) {
@@ -34,7 +41,7 @@ public class BowlingGame {
 
     private int bonusScore(int ix, int numBonuses) {
         int score = regularScore(ix);
-        if (ix + numBonuses < balls.length()) {
+        if (ix + numBonuses < allBalls.length()) {
             score += IntStream.range(1, numBonuses + 1)
                     .map(i -> regularScore(ix + i))
                     .sum();
@@ -43,7 +50,7 @@ public class BowlingGame {
     }
 
     private int regularScore(int ix) {
-        char c = balls.charAt(ix);
+        char c = allBalls.charAt(ix);
         switch(c)
         {
             case STRIKE:
