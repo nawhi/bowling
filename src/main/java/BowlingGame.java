@@ -1,7 +1,7 @@
 import java.util.stream.IntStream;
 
 public class BowlingGame {
-    public static final char STRIKE = 'X';
+    private static final char STRIKE = 'X';
     private static final char MISS = '-';
     private static final char SPARE = '/';
 
