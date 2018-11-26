@@ -9,7 +9,7 @@ public class BowlingGame {
     private final String regularBalls;
 
     public BowlingGame(String scorecard) {
-        this.allBalls = ballsFrom(scorecard);
+        this.allBalls = allBallsFrom(scorecard);
         this.regularBalls = nonBonusBallsFrom(scorecard);
     }
 
@@ -19,13 +19,13 @@ public class BowlingGame {
                 .sum();
     }
 
-    private String ballsFrom(String scorecard) {
+    private String allBallsFrom(String scorecard) {
         return scorecard.replace("|", "");
     }
 
     private String nonBonusBallsFrom(String scorecard) {
         int bonusIx = scorecard.indexOf("||");
-        return ballsFrom(scorecard.substring(0, bonusIx));
+        return allBallsFrom(scorecard.substring(0, bonusIx));
     }
 
     private int scoreBallAt(int index) {
