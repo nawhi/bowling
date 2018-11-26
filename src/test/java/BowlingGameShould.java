@@ -35,7 +35,7 @@ public class BowlingGameShould {
             "9/|X|X|5/|22|--|--|--|--|--||, 81",
             "X|7/|9-|X|-8|8/|-6|X|X|X||81, 167"
     })
-    public void add_numbers_correctly(String scorecard, int expectedTotal) {
+    public void calculate_score(String scorecard, int expectedTotal) {
         BowlingGame game = new BowlingGame(scorecard);
         assertThat(game.score(), is(expectedTotal));
     }
